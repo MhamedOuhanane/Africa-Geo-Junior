@@ -12,4 +12,7 @@ ALTER TABLE ville
 MODIFY nom VARCHAR(100);
     /* Exécute */
 
+/* Modifier la population de Maroc */
+UPDATE pays
+SET population = '37460000' WHERE nom = 'Maroc';
 
