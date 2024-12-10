@@ -2,18 +2,21 @@
 CREATE DATABASE geojunior;
         /*Exécuter*/
 
+
+
+
 /* crée les tableau utiliser (continent, pays, ville, Login)*/
     /*Table de continent*/
 CREATE TABLE continent (
     id_continent INT AUTO_INCREMENT,
-    nom VARCHAR(20),
+    nom VARCHAR(50),
     PRIMARY KEY (id_continent)
 );
 
     /*Table de pays*/
 CREATE TABLE pays (
     id_pays INT AUTO_INCREMENT,
-    nom VARCHAR(20),
+    nom VARCHAR(20) NOT NULL UNIQUE,
     population BIGINT,
     langues VARCHAR(20),
     id_continent INT,
@@ -24,9 +27,9 @@ CREATE TABLE pays (
     /*Table de ville*/
 CREATE TABLE ville (
     id_ville INT AUTO_INCREMENT,
-    nom VARCHAR(20),
+    nom VARCHAR(20) NOT NULL UNIQUE,
     description TEXT,
-    type ENUM('capitale' , 'autre'),
+    type ENUM('Capitale' , 'Principale'),
     id_pays INT,
     PRIMARY KEY (id_ville),
     FOREIGN KEY (id_pays) REFERENCES pays(id_pays)
@@ -40,5 +43,7 @@ CREATE TABLE Login (
     password VARCHAR(20),
     PRIMARY KEY (id_login)
 );
+
+CREATE TABLE etudiant( nom varchar(50), CNE varchar(20) );
 
         /*Exécuter*/

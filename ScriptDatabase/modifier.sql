@@ -5,11 +5,11 @@ MODIFY type ENUM('Capitale', 'Principale');
 
 /* modifier la langeur des varible nom de pays et ville  ,et la langeur de langues des pays */
 ALTER TABLE pays
-MODIFY nom VARCHAR(50);
+MODIFY nom VARCHAR(100);
 ALTER TABLE pays
-MODIFY langues VARCHAR(50);
+MODIFY langues VARCHAR(100);
 ALTER TABLE ville
-MODIFY nom VARCHAR(50);
+MODIFY nom VARCHAR(100);
     /* Exécute */
 
 
