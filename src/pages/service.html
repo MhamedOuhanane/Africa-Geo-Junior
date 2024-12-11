@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        rel="shortcut icon"
+        href="../assets/images/logo.png"
+        type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Africa Géo Junior</title>
+</head>
+<body class="relative top-0 left-0">
+    <header class="fixed z-10 bg-yellow-100 bg-opacity-70 w-full h-[4rem] flex justify-between items-center px-3">
+        <a class="h-full" href="../index.html">
+            <img class="h-full md:hidden " src="../assets/images/logo-Mobil.png" alt="logo de site">
+            <img class="hidden h-full md:block " src="../assets/images/logo-Descktop.png" alt="logo de site">
+        </a>
+        <div class="w-[50%] md:w-[25vw] flex justify-end gap-2 items-center">
+            <a href="../index.html">
+                <button class="Login w-auto h-auto bg-blue-600 text-white rounded-md px-4 py-1 ">Logout</button>
+            </a>
+            <a href="géographie.html">
+                <button class="w-auto h-auto bg-green-500 text-white rounded-md px-4 py-1 ">Géographie</button>
+            </a>
+        </div>
+    </header>
+    <section id="service" class="w-full h-[100vh]">
+        <div class="w-full h-full pt-[4rem] md:flex">
+            <div class="bg-slate-200 w-full h-[8rem] md:w-[20rem] md:h-full flex flex-col items-center ">
+                <button class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
+                    <img class="h-[80%]" src="../assets/images/logo-continent.png" alt="logo de continent">
+                    <span class="hover:scale-110">Ajouter un Continent</span>
+                </button>
+                <button class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
+                    <img class="h-[80%]" src="../assets/images/logo-pays.png" alt="logo de pays">
+                    <span class="hover:scale-110">Ajouter un Pays</span>
+                </button>
+                <button class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.5rem] flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
+                    <img class="h-[80%]" src="../assets/images/logo-ville.png" alt="logo de ville">
+                    <span class="hover:scale-110">Ajouter une Ville</span>
+                </button>
+            </div>
+            <div class=" relative w-full h-full">
+                <div class="absolute bg-black w-full h-full -z-10 flex overflow-x-auto">
+                    <img class="w-[100vw] h-full opacity-60" src="../assets/images/backround-map.jpg" alt="iamge About">
+                </div>
+                <div id="ADDContinent" class=" w-full h-full flex flex-wrap justify-between md:px-[10vw] gap-3 p-2">
+                    <form id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly">
+                        <label class="md:text-[1.2rem]" for="#continentname">Nom du continent</label>
+                        <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" class="w-[90%]" type="text" placeholder="Continent">
+                        <div class="w-full flex justify-center md:justify-end gap-2">
+                            <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
+                            <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
+                        </div>
+                    </form>
+                    <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto hidden">
+                        <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
+                            <span>Id</span>
+                            <span >Nom de Continent</span>
+                            <span>Logo</span>
+                        </div>
+                        <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] border-t-0">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="ADDPays" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto hidden">
+                    
+                </div>
+                <div id="ADDVille" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto hidden">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
