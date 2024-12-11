@@ -47,10 +47,12 @@
                 <div class="absolute bg-black w-full h-full -z-10 flex overflow-x-auto">
                     <img class="w-[100vw] h-full opacity-60" src="../assets/images/backround-map.jpg" alt="iamge About">
                 </div>
-                <div id="ADDContinent" class=" w-full h-full flex flex-wrap justify-between md:px-[10vw] gap-3 p-2">
+
+                <!-- Continent -->
+                <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2 hidden">
                     <form id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly">
                         <label class="md:text-[1.2rem]" for="#continentname">Nom du continent</label>
-                        <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" class="w-[90%]" type="text" placeholder="Continent">
+                        <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname" type="text" placeholder="Continent" required>
                         <div class="w-full flex justify-center md:justify-end gap-2">
                             <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
@@ -59,7 +61,7 @@
                     <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto hidden">
                         <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
                             <span>Id</span>
-                            <span >Nom de Continent</span>
+                            <span >Nom du Continent</span>
                             <span>Logo</span>
                         </div>
                         <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] border-t-0">
@@ -67,9 +69,43 @@
                         </div>
                     </div>
                 </div>
-                <div id="ADDPays" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto hidden">
-                    
+
+                <!-- Pays -->
+                <div id="ADDPays" class="w-full h-full  gap-3 p-2 md:px-10">
+                    <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly hidden">
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Paysname">Nom du Pays</label>
+                        <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Paysname" name="paysname" type="text" placeholder="Pays" required>
+
+                        <label class="w-[25%] text-center md:text-start md:text-[1.2rem]" for="#Payspopulation">Population</label>
+                        <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payspopulation" name="payspopulation" type="number" placeholder="Population" required>
+                        
+                        <label class="w-[20%] text-center md:text-start md:text-[1.2rem]" for="#Payscontinent">Continent</label>
+                        <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payscontinent" name="payscontinent" type="text" placeholder="Continent" required>
+                        
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Payslnagues">Langues</label>
+                        <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslnagues" type="text" placeholder="Langues" required>
+                        
+                        <div class="w-full flex justify-center md:justify-end gap-2">
+                            <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
+                            <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
+                        </div>
+                    </form>
+                    <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto ">
+                        <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_30%_14%_20%_10%_10%] items-center justify-items-center">
+                            <span>Id</span>
+                            <span >Nom du Pays</span>
+                            <span>Population</span>
+                            <span>Langues</span>
+                            <span>Logo</span>
+                            <span>Continent</span>
+                        </div>
+                        <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] border-t-0">
+
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Villes -->
                 <div id="ADDVille" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto hidden">
                     
                 </div>
