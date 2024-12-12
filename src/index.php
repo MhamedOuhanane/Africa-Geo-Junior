@@ -15,7 +15,7 @@
 </head>
 <body class="relative top-0 left-0">
     <header class="fixed z-20 bg-yellow-100 bg-opacity-70 w-full h-[4rem] flex justify-between items-center px-3">
-        <a class="h-full" href="index.html">
+        <a class="h-full" href="index.php">
             <img class="h-full md:hidden " src="./assets/images/logo-Mobil.png" alt="logo de site">
             <img class="hidden h-full md:block " src="./assets/images/logo-Descktop.png" alt="logo de site">
         </a>
@@ -26,10 +26,11 @@
     </header>
     <section id="About" class="relative w-full h-[100vh]">
         <div id="ModulLogin" class="fixed w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <form class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+            <form action="./pages/dbconnecte.php" method="post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+                <!-- <span class="text-center">Bonjour ! Entrez votre email et votre mot de passe pour vous connecter.</span> -->
                 <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                 <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com">
-                <label class="md:w-[40%]" for="#passwordlogin">Password</label>
+                <label class="md:w-[40%]" for="#passwordlogin">Mot de passe</label>
                 <input id="passwordlogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="passwordlogin" type="password" placeholder="********">
                 <input id="conferme" class="bg-blue-600 px-2 py-1 rounded-[3px] mt-4" type="submit" value="Conferme">
             </form>
@@ -51,7 +52,7 @@
                     culturellement que géographiquement, avec une variété de paysages 
                     allant des vastes déserts aux forêts tropicales, des savanes aux 
                     montagnes enneigées.</span>
-                    <a class="md:self-end md:mr-10" href="./pages/géographie.html">
+                    <a class="md:self-end md:mr-10" href="./pages/géographie.php">
                         <button class="w-auto h-auto bg-yellow-600 bg-opacity-70 text-white md:text-lg rounded-md px-5 py-1 ">Voir Plus</button>
                     </a>
             </div>
@@ -64,3 +65,5 @@
     <script type="module" src="./assets/js/script.js"></script>
 </body>
 </html>
+
+

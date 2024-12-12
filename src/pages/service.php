@@ -9,20 +9,21 @@
         type="image/x-icon"
     />
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="stylesheet" href="../assets/css/input.css">
     <title>Africa Géo Junior</title>
 </head>
 <body class="relative top-0 left-0">
     <header class="fixed z-10 bg-yellow-100 bg-opacity-70 w-full h-[4rem] flex justify-between items-center px-3">
-        <a class="h-full" href="../index.html">
+        <a class="h-full" href="../index.php">
             <img class="h-full md:hidden " src="../assets/images/logo-Mobil.png" alt="logo de site">
             <img class="hidden h-full md:block " src="../assets/images/logo-Descktop.png" alt="logo de site">
         </a>
         <div class="w-[50%] md:w-[25vw] flex justify-end gap-2 items-center">
-            <a href="../index.html">
+            <a href="../index.php">
                 <button class="Login w-auto h-auto bg-blue-600 text-white rounded-md px-4 py-1 ">Logout</button>
             </a>
-            <a href="géographie.html">
+            <a href="géographie.php">
                 <button class="w-auto h-auto bg-green-500 text-white rounded-md px-4 py-1 ">Géographie</button>
             </a>
         </div>
@@ -177,6 +178,7 @@
         </div>
     </section>
 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script type="module" src="../assets/js/service.js"></script>
 </body>
 </html>

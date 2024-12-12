@@ -9,18 +9,19 @@
         type="image/x-icon"
     />
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="stylesheet" href="../assets/css/input.css">
     <title>Africa Géo Junior</title>
 </head>
 <body class="relative top-0 left-0">
     <header class="fixed z-20 bg-yellow-100 bg-opacity-70 w-full h-[4rem] flex justify-between items-center px-3">
-        <a class="h-full" href="../index.html">
+        <a class="h-full" href="../index.php">
             <img class="h-full md:hidden " src="../assets/images/logo-Mobil.png" alt="logo de site">
             <img class="hidden h-full md:block " src="../assets/images/logo-Descktop.png" alt="logo de site">
         </a>
         <div class="w-[50%] md:w-[25vw] flex justify-end gap-2 items-center">
             <button id="Loginbtn" class="w-auto h-auto bg-blue-600 text-white rounded-md px-4 py-1 ">Login</button>
-            <a href="../index.html">
+            <a href="../index.php">
                 <button class="w-auto h-auto bg-green-500 text-white rounded-md px-4 py-1 ">About</button>
             </a>
         </div>
@@ -28,7 +29,7 @@
     <section id="géographie" class="w-full h-[100vh]">
         <div class="relative w-full h-full pt-[4rem] md:flex">
             <div id="ModulLogin" class="fixed z-10 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-                <form class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+                <form action="dbconnecte.php" method="Post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
                     <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                     <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com">
                     <label class="md:w-[40%]" for="#passwordlogin">Password</label>
@@ -107,6 +108,7 @@
         </div>
     </section>
 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script type="module" src="../assets/js/script.js"></script>
 
 </body>
