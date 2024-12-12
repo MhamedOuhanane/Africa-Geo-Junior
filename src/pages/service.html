@@ -49,8 +49,8 @@
                 </div>
 
                 <!-- Continent -->
-                <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2">
-                    <form id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly">
+                <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2 hidden">
+                    <form id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly ">
                         <label class="md:text-[1.2rem]" for="#continentname">Nom du continent</label>
                         <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname" type="text" placeholder="Continent" required>
                         <div class="w-full flex justify-center md:justify-end gap-2">
@@ -58,20 +58,22 @@
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
                         </div>
                     </form>
-                    <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto">
+
+                    <!-- Affichage des contnient -->
+                    <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto hidden">
                         <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
                             <span>Id</span>
-                            <span >Nom</span>
+                            <span >Continent</span>
                             <span>Logo</span>
                         </div>
                         <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
                             <span>1</span>
                             <span>Africa</span>
-                            <img class="w-[35%] md:w-[30%]" src="../assets/images/icone-Africa.jpg" alt="Icone D'Africa">
-                            <button class="w-[35%] md:w-[30%]">
+                            <img class="w-[35%] md:w-[30%]" src="../assets/images/icone-Africa.jpg" alt="Icone De contnient">
+                            <button class="ModifierContinent w-[35%] md:w-[30%]">
                                 <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
                             </button>
-                            <button  class="w-[35%] md:w-[30%]">
+                            <button  class="DeleteContnient w-[35%] md:w-[30%]">
                                 <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
                             </button>
                         </div>
@@ -79,8 +81,8 @@
                 </div>
 
                 <!-- Pays -->
-                <div id="ADDPays" class="w-full h-full  gap-3 p-2 md:px-10">
-                    <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly hidden">
+                <div id="ADDPays" class="w-full h-full  gap-3 p-2 md:px-10 hidden">
+                    <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
                         <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Paysname">Nom du Pays</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Paysname" name="paysname" type="text" placeholder="Pays" required>
 
@@ -98,34 +100,78 @@
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
                         </div>
                     </form>
-
-                    <div id="AffPaus" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto ">
-                        <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
-                            <span>Id</span>
-                            <span class="text-xs md:text-sm">Nom</span>
-                            <span class="text-xs md:text-sm">Population</span>
-                            <span class="text-xs md:text-sm">Langues</span>
-                        </div>
-                        <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
-                            <span>1</span>
-                            <span>Maroc</span>
-                            <span class="text-xs md:text-sm">37460000</span>
-                            <span class="text-xs md:text-sm text-center">Arabe, Amazigh</span>
-                            <img class="w-[50%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Maroc">
-                            <img class="w-[50%]" src="../assets/images/icone-Africa.jpg" alt="Icone D'Africa">
-                            <button class="w-[30%]">
-                                <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
-                            </button>
-                            <button  class="w-[30%]">
-                                <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
-                            </button>
-                        </div>
+                </div>
+                
+                <!-- Affichage des pays -->
+                <div id="AffPays" class="w-full h-[90%] p-3 overflow-y-auto ">
+                    <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
+                        <span>Id</span>
+                        <span class="text-xs md:text-sm">Pays</span>
+                        <span class="text-xs md:text-sm">Population</span>
+                        <span class="text-xs md:text-sm">Langues</span>
+                    </div>
+                    <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
+                        <span>1</span>
+                        <span>Maroc</span>
+                        <span class="text-xs md:text-sm">37460000</span>
+                        <span class="text-xs md:text-sm text-center">Arabe, Amazigh</span>
+                        <img class="w-[65%] md:w-[50%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Pays">
+                        <img class="w-[65%] md:w-[50%]" src="../assets/images/icone-Africa.jpg" alt="Icone de Continent">
+                        <button class="ModifierPays w-[30%]">
+                            <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                        </button>
+                        <button  class="DeletePays w-[30%]">
+                            <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                        </button>
                     </div>
                 </div>
 
                 <!-- Villes -->
-                <div id="ADDVille" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto hidden">
-                    
+                <div id="ADDVille" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 hidden">
+                    <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Villename">Nom du Ville</label>
+                        <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Villename" name="villename" type="text" placeholder="Ville" required>
+
+                        <label class="w-[25%] text-center md:text-start md:text-[1.2rem]" for="#VilleType">Type</label>
+                        <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VilleType" name="villetype" type="text" placeholder="Type" required>
+                        
+                        <label class="w-[20%] text-center md:text-start md:text-[1.2rem]" for="#VillePays">Pays</label>
+                        <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VillePays" name="villepays" type="text" placeholder="Pays" required>
+                        
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Villedesc">Descreption</label>
+                        <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="VilleDescreption" name="villedescreption" type="text" placeholder="Descreption" required>
+                        
+                        <div class="w-full flex justify-center md:justify-end gap-2">
+                            <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
+                            <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Affichage des villes -->
+                <div id="AffVilles" class="w-full h-[65%] p-3 hidden">
+                    <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center justify-items-center">
+                        <span>Id</span>
+                        <span class="text-xs md:text-sm">Ville</span>
+                        <span class="text-xs md:text-sm">Descreption</span>
+                        <span class="text-xs md:text-sm">Type</span>
+                    </div>
+                    <div class="bg-white w-full h-auto border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center py-1 justify-items-center">
+                        <span>1</span>
+                        <span>RABAT</span>
+                        <span class="text-xs md:text-sm text-center h-auto w-[96%]">
+                            Rabat est la capitale administrative du Maroc, 
+                            située sur la côte atlantique. Elle est aussi 
+                            un centre politique et économique.</span>
+                        <span class="text-xs md:text-[0.9rem]">Capitale</span>
+                        <img class="w-[50%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Maroc">
+                        <button class="MOdifierVille w-[30%]">
+                            <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                        </button>
+                        <button  class="DeleteVille w-[30%]">
+                            <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
