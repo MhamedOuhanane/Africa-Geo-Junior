@@ -29,7 +29,7 @@
     <section id="géographie" class="w-full h-[100vh]">
         <div class="relative w-full h-full pt-[4rem] md:flex">
             <div id="ModulLogin" class="fixed z-10 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-                <form action="dbconnecte.php" method="Post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+                <form action="login.php" method="Post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
                     <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                     <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com">
                     <label class="md:w-[40%]" for="#passwordlogin">Password</label>
@@ -68,41 +68,61 @@
 
                 <!-- Pays -->
                 <div id="Pays" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto">
-                    <div id="Maroc" class=" bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
-                        <img class="w-[60%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Maroc">
-                        <span class="md:text-[2.5vw]">Maroc</span>
+
+                    <!-- Afficher les donné des pays à partir de base de donné -->
+                    <?php 
+                        include("dbconnecte.php");
+                        $Pays = mysqli_query($conmySql, "SELECT * FROM pays");
+                        $Pays = $Pays -> fetch_all(MYSQLI_ASSOC);
+                        foreach($Pays as $element){
+                    ?> 
+
+                    <div class=" bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
+                        <img class="w-[60%]" <?php echo "src =" . FILTRENAME($JsonPays,$element['nom']) ?> alt="Logo de Maroc">
+                        <span class="md:text-[2vw]"><?php echo $element['nom'] ?></span>
                         <div>
                             <span class="text-xs md:text-sm">Population :</span>
-                            <span class="text-xs md:text-sm">37460000</span>
+                            <span class="text-xs md:text-sm"><?php echo $element['population'] ?></span>
                         </div>
                         <div>
                             <span class="text-xs md:text-sm">Langes :</span>
-                            <span class="text-xs md:text-sm">Arabe, Amazigh</span>
+                            <span class="text-xs md:text-sm"><?php echo $element['langues'] ?></span>
                         </div>
                         <div>
                             <span class="text-xs md:text-sm">Continent :</span>
                             <span class="text-xs md:text-sm">Africa</span>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
 
                 <!-- Villes -->
                 <div id="Villes" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto">
-                    <div id="Maroc" class=" bg-blue-200 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[15rem] flex flex-col items-center place-content-center gap-y-[2%] hover:scale-[1.02]">
-                        <span class="md:text-[1.5rem]">Rabat</span>
-                        <span class="text-xs md:text-sm text-center w-[96%]">
-                            Rabat est la capitale administrative du Maroc, 
-                            située sur la côte atlantique. Elle est aussi 
-                            un centre politique et économique.</span>
-                        <div>
+
+                    <!-- Affichier les donné des Villes à partir de base de donné -->
+                    <?php 
+                        $Villes = mysqli_query($conmySql, "SELECT * FROM ville");
+                        $Villes = $Villes -> fetch_all(MYSQLI_ASSOC);
+                        foreach($Villes as $Ville){
+                            $id_pays = $Ville['id_pays'];
+                            $nompays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = '$id_pays'");
+                            $nompays = mysqli_fetch_assoc($nompays);
+                    ?> 
+
+                    <div class=" bg-blue-200 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[15rem] grid grid-rows-[20%_45%_10%_15%] items-center justify-items-center gap-y-[2%] hover:scale-[1.02]">
+                        <span class="row-span-1 md:text-[1.4rem] font-bold"><?php echo $Ville['nom'] ?></span>
+                        <span class="text-xs md:text-sm text-center w-[96%]"><?php echo $Ville['description'] ?></span>
+                        <div class="row-span-1">
                             <span class="text-xs md:text-sm">Type :</span>
-                            <span class="text-xs md:text-[0.9rem]">Capitale</span>
+                            <span class="text-xs md:text-[0.9rem] font-bold"><?php echo $Ville['type'] ?></span>
                         </div>
-                        <div class="flex justify-center gap-[10%]">
-                            <span class="text-xs md:text-[0.9rem]">Maroc</span>
-                            <img class="w-[15%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Maroc">
+                        <div class="row-span-1 flex justify-center gap-[10%]">
+                            <span class="text-xs md:text-[0.9rem] font-bold"><?php echo $nompays['nom'] ?></span>
+                            <img class="w-[20%]" <?php echo "src =" . FILTRENAME($JsonPays,$nompays['nom']) ?> alt="Logo de Maroc">
                         </div>
                     </div>
+                    <?php  } ?>
+
                 </div>
             </div>
         </div>

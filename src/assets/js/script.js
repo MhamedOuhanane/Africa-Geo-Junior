@@ -1,14 +1,16 @@
 // L'affichage et cacher de Modul de Login
-// document.getElementById("ModulLogin").
+// document.getElementById("ModulLogin"):
 ModulLogin.classList.add("hidden");
 
+
 Loginbtn.addEventListener("click" , () => {
-    
+    document.querySelector('#ModulLogin > form').reset();
     ModulLogin.classList.toggle("hidden");
     document.body.classList.toggle("overflow-hidden");
 
     ModulLogin.addEventListener("click" , (element) => {
         if (!document.querySelector("#ModulLogin > form").contains(element.target)) {
+            document.querySelector('#ModulLogin > form').reset();
             ModulLogin.classList.add("hidden");
         }
     });

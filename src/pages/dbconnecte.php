@@ -1,18 +1,18 @@
-<?php 
+<?php
     $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
-    $email = $_POST['emaillogin'];
-    $password = $_POST['passwordlogin'];
-    $sql = "select * from login";
-    $res = $conmySql->query($sql);
-    $res = $res->fetch_all(MYSQLI_ASSOC);
-    foreach($res as $el){
-        if ($el['email'] == $email && $el['password'] == $password) {
-            echo '<script>location.replace("service.php")</script>';
-            // header("location: service.php");
 
-        }
-        //  else if ($el['email'] == $email && $el['password'] != $password) {
-        //     # code...
-        // }
-    }
+    if (!$conmySql) {
+    die("Connection failed: " . mysqli_connect_error());
+    };
+
+    // fonction de rechercher le src du pays
+    $JsonPays = file_get_contents('../assets/data/PaysAfrica.json');
+    $JsonPays = json_decode($JsonPays, true);
+    function FILTRENAME($JsonPays,$name){
+        foreach($JsonPays as $Element){
+            if ($Element['name'] == $name) {
+                return $Element['img_src'];
+            }
+        };
+    };
 ?>

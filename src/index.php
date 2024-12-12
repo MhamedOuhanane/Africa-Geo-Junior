@@ -26,7 +26,8 @@
     </header>
     <section id="About" class="relative w-full h-[100vh]">
         <div id="ModulLogin" class="fixed w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <form action="./pages/dbconnecte.php" method="post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+            <form action="./pages/login.php" method="post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+                
                 <!-- <span class="text-center">Bonjour ! Entrez votre email et votre mot de passe pour vous connecter.</span> -->
                 <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                 <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com">
@@ -65,5 +66,6 @@
     <script type="module" src="./assets/js/script.js"></script>
 </body>
 </html>
+
 
 

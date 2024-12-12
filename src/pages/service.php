@@ -63,9 +63,9 @@
                     <!-- Affichage des contnient -->
                     <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto hidden">
                         <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
-                            <span>Id</span>
-                            <span >Continent</span>
-                            <span>Logo</span>
+                            <span class=" font-bold">Id</span>
+                            <span class=" font-bold">Continent</span>
+                            <span class=" font-bold">Logo</span>
                         </div>
                         <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
                             <span>1</span>
@@ -104,26 +104,38 @@
                 </div>
                 
                 <!-- Affichage des pays -->
-                <div id="AffPays" class="w-full h-[90%] p-3 overflow-y-auto hidden">
+                <div id="AffPays" class="w-full h-[96%] self-center p-3 hidden">
                     <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
-                        <span>Id</span>
-                        <span class="text-xs md:text-sm">Pays</span>
-                        <span class="text-xs md:text-sm">Population</span>
-                        <span class="text-xs md:text-sm">Langues</span>
+                        <span class=" font-bold">Id</span>
+                        <span class="text-xs md:text-sm font-bold">Pays</span>
+                        <span class="text-xs md:text-sm font-bold">Population</span>
+                        <span class="text-xs md:text-sm font-bold">Langues</span>
                     </div>
-                    <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
-                        <span>1</span>
-                        <span>Maroc</span>
-                        <span class="text-xs md:text-sm">37460000</span>
-                        <span class="text-xs md:text-sm text-center">Arabe, Amazigh</span>
-                        <img class="w-[65%] md:w-[50%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Pays">
-                        <img class="w-[65%] md:w-[45%]" src="../assets/images/icone-Africa.jpg" alt="Icone de Continent">
-                        <button class="ModifierPays w-[25%]">
-                            <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
-                        </button>
-                        <button  class="DeletePays w-[25%]">
-                            <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
-                        </button>
+
+                    <div class="w-full h-[95%] overflow-y-auto">
+                        <!-- return les donné des pays à partir de base de donné -->
+                        <?php 
+                            include("dbconnecte.php");
+                            $Pays = mysqli_query($conmySql, "SELECT * FROM pays");
+                            $Pays = $Pays -> fetch_all(MYSQLI_ASSOC);
+                            foreach($Pays as $Ele){
+                        ?> 
+
+                        <div class="bg-white w-full h-auto border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
+                            <span><?php echo $Ele['id_pays'] ?></span>
+                            <span><?php echo $Ele['nom'] ?></span>
+                            <span class="text-xs md:text-sm"><?php echo $Ele['population'] ?></span>
+                            <span class="text-xs md:text-sm text-center"><?php echo $Ele['langues'] ?></span>
+                            <img class="w-[65%] md:w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$Ele['nom']) ?> alt="Logo de Pays">
+                            <img class="w-[65%] md:w-[45%]" src="../assets/images/icone-Africa.jpg" alt="Icone de Continent">
+                            <button class="ModifierPays w-[25%]">
+                                <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                            </button>
+                            <button  class="DeletePays w-[25%]">
+                                <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                            </button>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -150,28 +162,38 @@
                 </div>
 
                 <!-- Affichage des villes -->
-                <div id="AffVilles" class="w-full h-[65%] p-3 overflow-y-auto hidden">
+                <div id="AffVilles" class="w-full h-[96%] p-3 hidden">
                     <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center justify-items-center">
-                        <span>Id</span>
-                        <span class="text-xs md:text-sm">Ville</span>
-                        <span class="text-xs md:text-sm">Descreption</span>
-                        <span class="text-xs md:text-sm">Type</span>
+                        <span class=" font-bold">Id</span>
+                        <span class="text-xs md:text-sm font-bold">Ville</span>
+                        <span class="text-xs md:text-sm font-bold">Descreption</span>
+                        <span class="text-xs md:text-sm font-bold">Type</span>
                     </div>
-                    <div class="bg-white w-full h-auto border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center py-1 justify-items-center">
-                        <span>1</span>
-                        <span>RABAT</span>
-                        <span class="text-xs md:text-sm text-center h-auto w-[96%]">
-                            Rabat est la capitale administrative du Maroc, 
-                            située sur la côte atlantique. Elle est aussi 
-                            un centre politique et économique.</span>
-                        <span class="text-xs md:text-[0.9rem]">Capitale</span>
-                        <img class="w-[50%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Maroc">
-                        <button class="MOdifierVille w-[30%]">
-                            <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
-                        </button>
-                        <button  class="DeleteVille w-[30%]">
-                            <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
-                        </button>
+
+                    <div class="w-full h-[95%] overflow-y-auto ">
+                        <!-- Affichier les donné des Villes à partir de base de donné -->
+                        <?php 
+                            $Villes = mysqli_query($conmySql, "SELECT * FROM ville");
+                            $Villes = $Villes -> fetch_all(MYSQLI_ASSOC);
+                            foreach($Villes as $Ville){
+                                $id_pays = $Ville['id_pays'];
+                                $nompays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = '$id_pays'");
+                                $nompays = mysqli_fetch_assoc($nompays);
+                        ?> 
+                        <div class="bg-gray-100 w-full h-auto border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center py-1 justify-items-center">
+                            <span><?php echo $Ville['id_ville'] ?></span>
+                            <span><?php echo $Ville['nom'] ?></span>
+                            <span class="text-xs md:text-sm text-center h-auto w-[96%]"><?php echo $Ville['description'] ?></span>
+                            <span class="text-xs md:text-[0.9rem]"><?php echo $Ville['type'] ?></span>
+                            <img class="w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$nompays['nom']) ?> alt="Logo de Maroc">
+                            <button class="MOdifierVille w-[30%]">
+                                <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                            </button>
+                            <button  class="DeleteVille w-[30%]">
+                                <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                            </button>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
