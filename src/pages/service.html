@@ -30,15 +30,15 @@
     <section id="service" class="w-full h-[100vh]">
         <div class="w-full h-full pt-[4rem] md:flex">
             <div class="bg-slate-200 w-full h-[8rem] md:w-[20rem] md:h-full flex flex-col items-center ">
-                <button class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
+                <button id="continentBTN" class="bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
                     <img class="h-[80%]" src="../assets/images/logo-continent.png" alt="logo de continent">
                     <span class="hover:scale-110">Ajouter un Continent</span>
                 </button>
-                <button class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
+                <button id="paysBTN" class="bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
                     <img class="h-[80%]" src="../assets/images/logo-pays.png" alt="logo de pays">
                     <span class="hover:scale-110">Ajouter un Pays</span>
                 </button>
-                <button class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.5rem] flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
+                <button id="villeBTN" class="continentbtn bg-none w-[60%] md:w-[90%] h-[2.5rem] flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
                     <img class="h-[80%]" src="../assets/images/logo-ville.png" alt="logo de ville">
                     <span class="hover:scale-110">Ajouter une Ville</span>
                 </button>
@@ -49,12 +49,12 @@
                 </div>
 
                 <!-- Continent -->
-                <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2 hidden">
+                <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2">
                     <form id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly ">
                         <label class="md:text-[1.2rem]" for="#continentname">Nom du continent</label>
                         <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname" type="text" placeholder="Continent" required>
                         <div class="w-full flex justify-center md:justify-end gap-2">
-                            <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
+                            <input id="Affichercontinentbtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
                         </div>
                     </form>
@@ -96,14 +96,14 @@
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslnagues" type="text" placeholder="Langues" required>
                         
                         <div class="w-full flex justify-center md:justify-end gap-2">
-                            <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
+                            <input id="Afficherpaysbtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
                         </div>
                     </form>
                 </div>
                 
                 <!-- Affichage des pays -->
-                <div id="AffPays" class="w-full h-[90%] p-3 overflow-y-auto ">
+                <div id="AffPays" class="w-full h-[90%] p-3 overflow-y-auto hidden">
                     <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
                         <span>Id</span>
                         <span class="text-xs md:text-sm">Pays</span>
@@ -116,18 +116,18 @@
                         <span class="text-xs md:text-sm">37460000</span>
                         <span class="text-xs md:text-sm text-center">Arabe, Amazigh</span>
                         <img class="w-[65%] md:w-[50%]" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg" alt="Logo de Pays">
-                        <img class="w-[65%] md:w-[50%]" src="../assets/images/icone-Africa.jpg" alt="Icone de Continent">
-                        <button class="ModifierPays w-[30%]">
+                        <img class="w-[65%] md:w-[45%]" src="../assets/images/icone-Africa.jpg" alt="Icone de Continent">
+                        <button class="ModifierPays w-[25%]">
                             <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
                         </button>
-                        <button  class="DeletePays w-[30%]">
+                        <button  class="DeletePays w-[25%]">
                             <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
                         </button>
                     </div>
                 </div>
 
                 <!-- Villes -->
-                <div id="ADDVille" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 hidden">
+                <div id="ADDVille" class="w-full h-full  gap-3 p-2 md:px-10 hidden">
                     <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
                         <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Villename">Nom du Ville</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Villename" name="villename" type="text" placeholder="Ville" required>
@@ -142,14 +142,14 @@
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="VilleDescreption" name="villedescreption" type="text" placeholder="Descreption" required>
                         
                         <div class="w-full flex justify-center md:justify-end gap-2">
-                            <input class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
+                            <input id="Affichervillebtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
                         </div>
                     </form>
                 </div>
 
                 <!-- Affichage des villes -->
-                <div id="AffVilles" class="w-full h-[65%] p-3 hidden">
+                <div id="AffVilles" class="w-full h-[65%] p-3 overflow-y-auto hidden">
                     <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center justify-items-center">
                         <span>Id</span>
                         <span class="text-xs md:text-sm">Ville</span>
@@ -176,5 +176,7 @@
             </div>
         </div>
     </section>
+
+    <script type="module" src="../assets/js/service.js"></script>
 </body>
 </html>
