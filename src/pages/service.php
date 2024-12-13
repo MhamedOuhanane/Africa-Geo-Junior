@@ -181,7 +181,9 @@
                             <img class="w-[65%] md:w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$Ele['nom']) ?> alt="Logo de Pays">
                             <img class="w-[65%] md:w-[45%]" src="../assets/images/icone-Africa.jpg" alt="Icone de Continent">
                             <button class="ModifierPays w-[25%]">
-                                <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                                <a <?php echo "href=modifier.php?ModP=" . $Ele['id_pays']?>>
+                                    <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                                </a>
                             </button>
                             <button  class="DeletePays w-[25%]">
                                 <a <?php echo "href=service.php?Supp=" . $Ele['id_pays'] ?>>
@@ -241,7 +243,9 @@
                             <span class="text-xs md:text-[0.9rem]"><?php echo $Ville['type'] ?></span>
                             <img class="w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$nompays['nom']) ?> alt="Logo de Maroc">
                             <button class="MOdifierVille w-[30%]">
-                                <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                                <a <?php echo "href=modifier.php?ModV=" . $Ville['id_ville'] ?>>
+                                    <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                                </a>
                             </button>
                             <button  class="DeleteVille w-[30%]">
                                 <a <?php echo "href=service.php?Supp=" . $Ville['id_ville'] * (-1) ?>>
