@@ -1,3 +1,44 @@
+<?php 
+    $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
+    if (isset($_POST['submitville'])) {
+
+        $villename = $_POST['villename'];
+        $villetype = $_POST['villetype'];
+        $villedescreption = $_POST['villedescreption'];
+        $villepays = $_POST['villepays'];
+
+        $forignpays = mysqli_query($conmySql, "SELECT id_pays FROM pays WHERE nom = '$villepays'");
+        $forignpays = mysqli_fetch_assoc($forignpays);
+        $id_pays = $forignpays['id_pays'];
+
+        $insertville = "INSERT INTO ville(nom, description, type, id_pays) VALUES ('$villename', '$villedescreption', '$villetype', $id_pays)";
+        if (mysqli_query($conmySql,$insertville)) {
+            header("location: service.php");
+        };
+
+    } else if (!empty($_POST['submitpays'])) {
+
+        $paysname = $_POST['paysname'];
+        $payspopulation = $_POST['payspopulation'];
+        $payslnagues = $_POST['payslnagues'];
+        $payscontinent = $_POST['payscontinent'];
+
+        $forigncontinent = mysqli_query($conmySql, "SELECT id_continent FROM continent WHERE nom = '$payscontinent'");
+        $forigncontinent = mysqli_fetch_assoc($forigncontinent);
+        $id_continent = $forigncontinent['id_continent'];
+
+        $insertpays = "INSERT INTO pays(nom, population, langues, id_continent) VALUES ('$paysname', $payspopulation, '$payslnagues', $id_continent)";
+        if (mysqli_query($conmySql,$insertpays)) {
+            header("location: service.php");
+        }
+
+    } else{
+        echo "hello";
+    };
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +125,7 @@
                 <!-- Pays -->
                 <div id="ADDPays" class="w-full h-full  gap-3 p-2 md:px-10 hidden">
 
-                    <form action="insert.php" method="Post" id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
+                    <form action="service.php" method="Post" id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
                         <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Paysname">Nom du Pays</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Paysname" name="paysname" type="text" placeholder="Pays" required>
 
@@ -124,7 +165,7 @@
 
                         <div class="bg-white w-full h-auto border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
                             <span><?php echo $Ele['id_pays'] ?></span>
-                            <span><?php echo $Ele['nom'] ?></span>
+                            <span class="text-center"><?php echo $Ele['nom'] ?></span>
                             <span class="text-xs md:text-sm"><?php echo $Ele['population'] ?></span>
                             <span class="text-xs md:text-sm text-center"><?php echo $Ele['langues'] ?></span>
                             <img class="w-[65%] md:w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$Ele['nom']) ?> alt="Logo de Pays">
