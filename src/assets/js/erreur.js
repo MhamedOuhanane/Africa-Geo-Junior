@@ -1,13 +1,11 @@
 
 let ModulErreur = document.querySelector('#ModulErreur') || null;
-if (ModulErreur != null) {
-    ModulErreur.remove();
-}
 
 // conferme le message d'Erreur
-let conferme = document.querySelector("#OK") || null;
-if (conferme != null) {
-    conferme.addEventListener("click" , () => {
+let OK = document.
+if (OK != null) {
+    OK.addEventListener("click" , () => {
+        console.log('A3');
         ModulErreur.remove();
         ModulLogin.classList.toggle("hidden");
         document.body.classList.toggle("overflow-hidden");
@@ -21,4 +19,3 @@ if (conferme != null) {
         });
     });
 };
-

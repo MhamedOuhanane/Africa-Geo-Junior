@@ -92,7 +92,6 @@
 
                 <!-- Pays -->
                 <div id="Pays" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto">
-
                     <!-- Afficher les donné des pays à partir de base de donné -->
                     <?php 
                         include("dbconnecte.php");
@@ -101,7 +100,7 @@
                         foreach($Pays as $element){
                     ?> 
 
-                    <div class=" bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
+                    <div class="cartePays bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
                         <img class="w-[60%]" <?php echo "src =" . FILTRENAME($JsonPays,$element['nom']) ?> alt="Logo de Maroc">
                         <span class="md:text-[2vw] text-center"><?php echo $element['nom'] ?></span>
                         <div>
@@ -122,18 +121,20 @@
 
                 <!-- Villes -->
                 <div id="Villes" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto">
-
                     <!-- Affichier les donné des Villes à partir de base de donné -->
                     <?php 
                         $Villes = mysqli_query($conmySql, "SELECT * FROM ville");
                         $Villes = $Villes -> fetch_all(MYSQLI_ASSOC);
-                        foreach($Villes as $Ville){
-                            $id_pays = $Ville['id_pays'];
-                            $nompays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = '$id_pays'");
-                            $nompays = mysqli_fetch_assoc($nompays);
+                        if (isset($_POST['text'])) {
+                            $text = $_POST['text'];
+                            foreach($Villes as $Ville){
+                                $id_pays = $Ville['id_pays'];
+                                $nompays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = '$id_pays'");
+                                $nompays = mysqli_fetch_assoc($nompays);
+                                if ($text == $nompays) {
                     ?> 
 
-                    <div class=" bg-blue-200 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[15rem] grid grid-rows-[20%_45%_10%_15%] items-center justify-items-center gap-y-[2%] hover:scale-[1.02]">
+                    <div class="carteVille bg-blue-200 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[15rem] grid grid-rows-[20%_45%_10%_15%] items-center justify-items-center gap-y-[2%] hover:scale-[1.02]">
                         <span class="row-span-1 md:text-[1.4rem] font-bold"><?php echo $Ville['nom'] ?></span>
                         <span class="text-xs md:text-sm text-center w-[96%]"><?php echo $Ville['description'] ?></span>
                         <div class="row-span-1">
@@ -145,7 +146,10 @@
                             <img class="w-[20%]" <?php echo "src =" . FILTRENAME($JsonPays,$nompays['nom']) ?> alt="Logo de Maroc">
                         </div>
                     </div>
-                    <?php  } ?>
+                    <?php       }
+                            }
+                    } ?>
+                    <span id="LIENPAYS" class="hidden">Tous</span>
 
                 </div>
             </div>

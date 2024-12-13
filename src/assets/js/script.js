@@ -13,6 +13,7 @@ Loginbtn.addEventListener("click" , () => {
             ModulLogin.classList.add("hidden");
         }
     });
+    
 
 });
 
@@ -54,9 +55,25 @@ if (Villebtn != null) {
     });
 }
 
+        // Ajax
+    //l'appelle de condition de filtrage des Villes
+    document.querySelectorAll(".cartePays").forEach(element => {
+        element.addEventListener('click', () => {
+            LIENPAYS.textContent = element.children[1].textContent;
+            let text = LIENPAYS.textContent;
+            Pays.classList.add("hidden");
+            Villes.classList.remove("hidden");
 
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/src/pages/géographie.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    alert("Réponse de PHP : " + xhr.responseText);
+                }
+            };
 
-if (Pays != null) {
-    
-}
+            xhr.send("text=" + encodeURIComponent(text));
+        });
+    });

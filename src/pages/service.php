@@ -3,6 +3,8 @@
     if (isset($_POST['submitville'])) {
 
         $villename = $_POST['villename'];
+        
+
         $villetype = $_POST['villetype'];
         $villedescreption = $_POST['villedescreption'];
         $villepays = $_POST['villepays'];

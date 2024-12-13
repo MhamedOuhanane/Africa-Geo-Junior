@@ -1,4 +1,34 @@
+<?php
+    $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
+    if (!empty($_POST['modifierpays'])) {
+        $nounom = $_POST['paysname'];
+        $noupopulation = $_POST['payspopulation'];
+        $noulangues = $_POST['payslangues'];
+        $cont = $_POST['payscontinent'];
+        $paysid = $_POST['paysid'];
+        $noucontient = mysqli_query($conmySql, "SELECT id_continent FROM continent WHERE nom = '$cont'");
+        $noucontient = mysqli_fetch_assoc($noucontient);
+        $nouidcontient = $noucontient['id_continent'];
+        $modifier = "UPDATE pays SET nom = '$nounom', population = $noupopulation, langues = '$noulangues', id_continent = $nouidcontient WHERE id_pays =". $paysid;
+        if (mysqli_query($conmySql, $modifier)) {
+            header("location: service.php");
+        }
+    } else if (!empty($_POST['modifierville'])) {
+        $nounomv = $_POST['villename'];
+        $noutype = $_POST['villetype'];
+        $noudescription = $_POST['villedescreption'];
+        $pay = $_POST['villepays'];
+        $villeid = $_POST['villeid'];
+        $nouvcontient = mysqli_query($conmySql, "SELECT id_pays FROM pays WHERE nom = '$pay'");
+        $nouvcontient = mysqli_fetch_assoc($nouvcontient);
+        $nouvidcontient = $nouvcontient['id_pays'];
+        $modifierv = "UPDATE ville SET nom = '$nounomv', type = '$noutype', description = '$noudescription', id_pays = $nouvidcontient WHERE id_ville =". $villeid;
+        if (mysqli_query($conmySql, $modifierv)) {
+            header("location: service.php");
+        }
+    };
 
+?>
 
 
 
@@ -71,9 +101,6 @@
         <!-- Pays -->
         <?php
 
-use function PHPSTORM_META\map;
-
-            $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
             if (isset($_GET['ModP'])) {
 
                 $id_pays = $_GET['ModP'];
@@ -97,7 +124,8 @@ use function PHPSTORM_META\map;
                             <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payscontinent" name="payscontinent" type="text" placeholder="Continent" value=' .$nomcontinent .' required>
 
                             <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payslnagues">Langues</label>
-                            <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslnagues" type="text" placeholder="Langues" value= '. $infop['langues'] .' required>
+                            <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslangues" type="text" placeholder="Langues" value= "'. $infop['langues'] .'" required>
+                            <input class="hidden" name="paysid" type="number" value= "' . $id_pays .'">
                                 
                             <div class="w-full flex justify-center md:justify-end gap-2">
                                 <input class="bg-green-500 text-white px-2 rounded-sm p-1" name="modifierpays" type="submit" value="Modifier">
@@ -109,8 +137,8 @@ use function PHPSTORM_META\map;
             
             if (isset($_GET['ModV'])) {
 
-                $d_ville = $_GET['ModV'];
-                $infov = mysqli_query($conmySql , "SELECT * FROM ville WHERE id_ville = $d_ville");
+                $id_ville = $_GET['ModV'];
+                $infov = mysqli_query($conmySql , "SELECT * FROM ville WHERE id_ville = $id_ville");
                 $infov = mysqli_fetch_assoc($infov);
                 
                 $terme1 = $infov['id_pays'];
@@ -131,6 +159,7 @@ use function PHPSTORM_META\map;
                             
                             <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Villedesc">Descreption</label>
                             <input class=" w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="VilleDescreption" name="villedescreption" type="text" placeholder="Descreption" value= "'. $infov['description'] .'" required>
+                            <input class="hidden" name="villeid" type="number" value= "' . $id_ville .'">
                             
                             <div class="w-full flex justify-center md:justify-end gap-2">
                                 <input class="bg-green-500 text-white px-2 rounded-sm p-1" name="modifierville" type="submit" value="Modifier">
