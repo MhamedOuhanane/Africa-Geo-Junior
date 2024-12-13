@@ -14,11 +14,12 @@
 
         $verification = mysqli_query($conmySql, "SELECT * FROM pays WHERE nom = '$villename'");
         $verification = $verification -> fetch_all(MYSQLI_ASSOC);
+        var_dump($verification);
 
-        if (count($verification)) {
+        if ($verification == '{}') {
             $insertville = "INSERT INTO ville(nom, description, type, id_pays) VALUES ('$villename', '$villedescreption', '$villetype', $id_pays)";
             if (mysqli_query($conmySql,$insertville)) {
-                header("location: service.php");
+                "Location: service.php?message=L'ajout du Ville ".$villename." à la liste a été validé avec succès et enregistré dans la liste des villes";
             } else{
                 $ERRUE = mysqli_error($conmySql);
                 echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
@@ -45,13 +46,31 @@
         if ($verification[0] == 0 ) {
             $insertpays = "INSERT INTO pays(nom, population, langues, id_continent) VALUES ('$paysname', $payspopulation, '$payslnagues', $id_continent)";
             if (mysqli_query($conmySql,$insertpays)) {
-                header("location: service.php");
+                header("Location: service.php?message=L'ajout du pays ".$paysname." à la liste a été validé avec succès et enregistré dans la liste des pays");
             }   else{
                 $ERRUE = mysqli_error($conmySql);
                 echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
             };
         } else {
             $ERRUE = "Le pays " . $nom_pays . " existe déjà dans la listes des pays.";
+            echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
+        };
+    } else if (isset($_GET['continentname'])) {
+        $Continent = $_GET['continentname'];
+
+        $verification = mysqli_query($conmySql, "SELECT * FROM continent WHERE nom = '$Continent'");
+        $verification = mysqli_fetch_array($verification);
+        
+        if ($verification[0] == 0) {
+            $nouvcont = mysqli_query($conmySql, "INSERT INTO continent(nom) VALUES ('$Continent')");
+            if (mysqli_query($conmySql,$insertpays)) {
+                header("Location: service.php?message=L'ajout du Continent ". $Continent ." à la liste a été validé avec succès et enregistré dans la liste des continent");
+            }   else{
+                $ERRUE = mysqli_error($conmySql);
+                echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
+            };
+        } else {
+            $ERRUE = "Le Continent " . $Continent . " existe déjà dans la listes des continent.";
             echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
         };
     }
@@ -61,14 +80,23 @@
 
         if ($Supp > 0) {
             $supprimer = "DELETE FROM pays WHERE id_pays = $Supp";
-            mysqli_query($conmySql, $supprimer);
+            if (mysqli_query($conmySql, $supprimer)){
+                header("Location: service.php?message=Le pays a été supprimé avec succès de la liste.");
+            };
         } else if ($Supp < 0) {
             $Supp *= (-1);
             $supprimer = "DELETE FROM ville WHERE id_ville = $Supp";
-            mysqli_query($conmySql, $supprimer);
+            if (mysqli_query($conmySql, $supprimer)){
+                header("Location: service.php?message=La ville a été supprimé avec succès de la liste.");
+            };
         }
+    } else if (isset($_GET['dell'])) {
+        $dell = $_GET['Supp'];
+        $supprimer = "DELETE FROM continent WHERE id_continent = $dell";
+        if (mysqli_query($conmySql, $supprimer)){
+            header("Location: service.php?message=Le Continent a été supprimé avec succès de la liste.");
+        };
     }
-
 ?>
 
 
@@ -104,6 +132,7 @@
     </header>
     <section id="service" class="relative w-full h-[100vh]">
 
+
         <?php 
             if (isset($_GET['Erreur'])) {
                 echo '<div id="ModulErreur" class="fixed z-30 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
@@ -114,7 +143,16 @@
                                 </a>
                             </div>
                         </div>';
-            };
+            } else if (isset($_GET['message'])) {
+                echo '<div id="ModulErreur" class="fixed z-30 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                            <div class="bg-white w-[60%] h-[50vh] md:w-[40%] md:h-[40vh] rounded-md flex flex-col justify-center items-center gap-y-3">
+                                <span class="w-[90%] text-green-500 text-center">' .$_GET['message'] .'</span>
+                                <a href="service.php">
+                                    <button id="OK" class="bg-blue-700 text-white p-1 px-2 rounded-sm">OK</button>
+                                </a>
+                            </div>
+                        </div>';
+            } ;
         ?>
 
         <div class="w-full h-full pt-[4rem] md:flex">
@@ -143,12 +181,11 @@
                         <label class="md:text-[1.2rem] font-bold" for="#continentname">Nom du continent</label>
                         <select class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname">
                             <option value="Africa">Africa</option>
-                            <option value="Asia">Africa</option>
-                            <option value="Europe">Africa</option>
-                            <option value="North Amirica">Africa</option>
-                            <option value="Oceane">Africa</option>
-                            <option value="South Amirica">Africa</option>
-                            <option value="Africa">Africa</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="North Amirica">North Amirica</option>
+                            <option value="Oceania">Oceania</option>
+                            <option value="South Amirica">South Amirica</option>
                         </select>
                         <div class="w-full flex justify-center md:justify-end gap-2">
                             <input id="Affichercontinentbtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
@@ -157,22 +194,34 @@
                     </form>
 
                     <!-- Affichage des contnient -->
-                    <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 overflow-y-auto hidden">
+                    <div id="AffContinents" class="w-full h-[65%] gap-y-2 py-1 hidden">
                         <div class="bg-gray-200 w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
                             <span class=" font-bold">Id</span>
                             <span class=" font-bold">Continent</span>
                             <span class=" font-bold">Logo</span>
                         </div>
-                        <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
-                            <span>1</span>
-                            <span>Africa</span>
-                            <img class="w-[35%] md:w-[30%]" src="../assets/images/icone-Africa.jpg" alt="Icone De contnient">
-                            <button class="ModifierContinent w-[35%] md:w-[30%]">
-                                <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
-                            </button>
-                            <button  class="DeleteContnient w-[35%] md:w-[30%]">
-                                <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
-                            </button>
+                        <div class="w-full h-[95%] overflow-y-auto">
+                            <!-- return les donné des continent à partir de base de donné -->
+                            <?php 
+                                include("dbconnecte.php");
+                                $Pays = mysqli_query($conmySql, "SELECT * FROM continent");
+                                $Pays = $Pays -> fetch_all(MYSQLI_ASSOC);
+                                foreach($Pays as $Element){
+                            ?> 
+                                <div class="bg-white w-full h-[2.5rem] border-gray-500 border-[1px] grid grid-cols-[10%_50%_20%_10%_10%] items-center justify-items-center">
+                                    <span><?php $Element['id_continent'] ?></span>
+                                    <span  class="text-[1vw] md:text-[1.6vw] text-center"><?php $Element['nom'] ?></span>
+                                    <img class="w-[35%] md:w-[30%]" src="../assets/images/icone-Africa.jpg" alt="Icone De contnient">
+                                    <button class="ModifierContinent w-[35%] md:w-[30%]">
+                                        <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
+                                    </button>
+                                    <button  class="DeleteContnient w-[35%] md:w-[30%]">
+                                        <a <?php echo "href=service.php?dell=" . $Element['id_continent'] ?>>
+                                            <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                                        </a>
+                                        </button>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -305,7 +354,6 @@
         </div>
     </section>
 
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <script type="module" src="../assets/js/service.js"></script>
+    <script type="module" src="../assets/js/script.js"></script>
 </body>
 </html>
