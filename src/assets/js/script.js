@@ -27,9 +27,10 @@ let Paysbtn = document.querySelector('#Paysbtn') || null;
 if (Pays != null) {
     Pays.classList.add("hidden");
 }
-if (Villes != null) {
-    Villes.classList.add("hidden");
-}
+
+// if (Villes != null) {
+//     Villes.classList.add("hidden");
+// }
 
 if (Continentbtn != null) {
     Continentbtn.addEventListener("click" , () => {
@@ -54,26 +55,3 @@ if (Villebtn != null) {
         Villes.classList.remove("hidden");
     });
 }
-
-        // Ajax
-    //l'appelle de condition de filtrage des Villes
-    document.querySelectorAll(".cartePays").forEach(element => {
-        element.addEventListener('click', () => {
-            LIENPAYS.textContent = element.children[1].textContent;
-            let text = LIENPAYS.textContent;
-            Pays.classList.add("hidden");
-            Villes.classList.remove("hidden");
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/src/pages/géographie.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            xhr.onload = function() {
-                if (xhr.status == 200) {
-                    alert("Réponse de PHP : " + xhr.responseText);
-                }
-            };
-
-            xhr.send("text=" + encodeURIComponent(text));
-        });
-    });

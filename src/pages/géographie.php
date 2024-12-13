@@ -81,7 +81,7 @@
                 </div>
 
                 <!-- Continents -->
-                <div id="Continents" class=" w-full h-full flex flex-wrap justify-evenly place-content-center ">
+                <div id="Continents" class=" w-full h-full flex flex-wrap justify-evenly place-content-center <?php if (isset($_GET['Filtre'])) { echo "hidden";} ?>">
                     <img id="NorthAm" class="w-[35%] h-[40%]" src="../assets/images/NA-Map.png" alt="Map NA">
                     <img id="Europe" class="w-[20%] h-[30%] mt-4" src="../assets/images/Europe-Map.png" alt="Map Europe">
                     <img id="Asia" class="w-[40%] h-[40%]" src="../assets/images/Asia-Map.png" alt="Map Asia">
@@ -91,7 +91,7 @@
                 </div>
 
                 <!-- Pays -->
-                <div id="Pays" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto">
+                <div id="Pays" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto ">
                     <!-- Afficher les donné des pays à partir de base de donné -->
                     <?php 
                         include("dbconnecte.php");
@@ -99,39 +99,40 @@
                         $Pays = $Pays -> fetch_all(MYSQLI_ASSOC);
                         foreach($Pays as $element){
                     ?> 
-
-                    <div class="cartePays bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
-                        <img class="w-[60%]" <?php echo "src =" . FILTRENAME($JsonPays,$element['nom']) ?> alt="Logo de Maroc">
-                        <span class="md:text-[2vw] text-center"><?php echo $element['nom'] ?></span>
-                        <div>
-                            <span class="text-xs md:text-sm">Population :</span>
-                            <span class="text-xs md:text-sm"><?php echo $element['population'] ?></span>
+                    <a <?php echo "href=géographie.php?Filtre=" . $element['nom']?>>
+                        <div class="cartePays bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
+                            <img class="w-[60%]" <?php echo "src =" . FILTRENAME($JsonPays,$element['nom']) ?> alt="Logo de Maroc">
+                            <span class="md:text-[2vw] text-center"><?php echo $element['nom'] ?></span>
+                            <div>
+                                <span class="text-xs md:text-sm">Population :</span>
+                                <span class="text-xs md:text-sm"><?php echo $element['population'] ?></span>
+                            </div>
+                            <div>
+                                <span class="text-xs md:text-sm">Langes :</span>
+                                <span class="text-xs md:text-sm"><?php echo $element['langues'] ?></span>
+                            </div>
+                            <div>
+                                <span class="text-xs md:text-sm">Continent :</span>
+                                <span class="text-xs md:text-sm">Africa</span>
+                            </div>
                         </div>
-                        <div>
-                            <span class="text-xs md:text-sm">Langes :</span>
-                            <span class="text-xs md:text-sm"><?php echo $element['langues'] ?></span>
-                        </div>
-                        <div>
-                            <span class="text-xs md:text-sm">Continent :</span>
-                            <span class="text-xs md:text-sm">Africa</span>
-                        </div>
-                    </div>
+                    </a>
                     <?php } ?>
                 </div>
 
                 <!-- Villes -->
-                <div id="Villes" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto">
+                <div id="Villes" class="w-full h-full flex flex-wrap justify-evenly gap-3 p-3 overflow-y-auto <?php if (!isset($_GET['Filtre'])) { echo "hidden";}?>">
                     <!-- Affichier les donné des Villes à partir de base de donné -->
                     <?php 
                         $Villes = mysqli_query($conmySql, "SELECT * FROM ville");
                         $Villes = $Villes -> fetch_all(MYSQLI_ASSOC);
-                        if (isset($_POST['text'])) {
-                            $text = $_POST['text'];
+                        if (isset($_GET['Filtre'])) {
+                            $Filtre = $_GET['Filtre'];
                             foreach($Villes as $Ville){
                                 $id_pays = $Ville['id_pays'];
                                 $nompays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = '$id_pays'");
                                 $nompays = mysqli_fetch_assoc($nompays);
-                                if ($text == $nompays) {
+                                if ($Filtre == $nompays['nom']) {
                     ?> 
 
                     <div class="carteVille bg-blue-200 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[15rem] grid grid-rows-[20%_45%_10%_15%] items-center justify-items-center gap-y-[2%] hover:scale-[1.02]">
@@ -148,7 +149,25 @@
                     </div>
                     <?php       }
                             }
-                    } ?>
+                        }else {
+                            foreach($Villes as $Ville){
+                                $id_pays = $Ville['id_pays'];
+                                $nompays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = '$id_pays'");
+                                $nompays = mysqli_fetch_assoc($nompays);
+                    ?>
+                        <div class="carteVille bg-blue-200 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[15rem] grid grid-rows-[20%_45%_10%_15%] items-center justify-items-center gap-y-[2%] hover:scale-[1.02]">
+                            <span class="row-span-1 md:text-[1.4rem] font-bold"><?php echo $Ville['nom'] ?></span>
+                            <span class="text-xs md:text-sm text-center w-[96%]"><?php echo $Ville['description'] ?></span>
+                            <div class="row-span-1">
+                                <span class="text-xs md:text-sm">Type :</span>
+                                <span class="text-xs md:text-[0.9rem] font-bold"><?php echo $Ville['type'] ?></span>
+                            </div>
+                            <div class="row-span-1 flex justify-center gap-[10%]">
+                                <span class="text-xs md:text-[0.9rem] font-bold"><?php echo $nompays['nom'] ?></span>
+                                <img class="w-[20%]" <?php echo "src =" . FILTRENAME($JsonPays,$nompays['nom']) ?> alt="Logo de Maroc">
+                            </div>
+                        </div>
+                    <?php }} ?>
                     <span id="LIENPAYS" class="hidden">Tous</span>
 
                 </div>

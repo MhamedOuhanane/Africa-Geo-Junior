@@ -2,7 +2,7 @@
 let ModulErreur = document.querySelector('#ModulErreur') || null;
 
 // conferme le message d'Erreur
-let OK = document.
+let OK = document.querySelector("#OK") || null;
 if (OK != null) {
     OK.addEventListener("click" , () => {
         console.log('A3');
