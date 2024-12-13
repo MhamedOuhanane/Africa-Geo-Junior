@@ -354,6 +354,6 @@
         </div>
     </section>
 
-    <script type="module" src="../assets/js/script.js"></script>
+    <script type="module" src="../assets/js/service.js"></script>
 </body>
 </html>
