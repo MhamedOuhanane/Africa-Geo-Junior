@@ -71,14 +71,16 @@
         <!-- Pays -->
         <?php
 
+use function PHPSTORM_META\map;
+
             $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
             if (isset($_GET['ModP'])) {
 
                 $id_pays = $_GET['ModP'];
-                $info = mysqli_query($conmySql, "SELECT * FROM pays WHERE id_pays = $id_pays");
-                $info = mysqli_fetch_assoc($info);
+                $infop = mysqli_query($conmySql, "SELECT * FROM pays WHERE id_pays = $id_pays");
+                $infop = mysqli_fetch_assoc($infop);
                 
-                $terme = $info['id_continent'];
+                $terme = $infop['id_continent'];
                 $continent = mysqli_query($conmySql , "SELECT nom FROM continent WHERE id_continent = '$terme'");
                 $continent = mysqli_fetch_assoc($continent);
                 $nomcontinent = $continent['nom'];
@@ -86,16 +88,16 @@
                 echo '<div class="bg-gray-300 w-[70%] h-[70%] rounded-[0.2rem]  gap-3 py-2 md:px-10">
                         <form action="modifier.php" method="Post" id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
                             <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Paysname">Nom du Pays</label>
-                            <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Paysname" name="paysname" type="text" placeholder="Pays" value= "'. $info['nom'] .'" required>
+                            <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Paysname" name="paysname" type="text" placeholder="Pays" value= "'. $infop['nom'] .'" required>
                             
                             <label class="w-[25%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payspopulation">Population</label>
-                            <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payspopulation" name="payspopulation" type="number" placeholder="Population" value= '. $info['population'] .' required>
+                            <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payspopulation" name="payspopulation" type="number" placeholder="Population" value= '. $infop['population'] .' required>
 
                             <label class="w-[20%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payscontinent">Continent</label>
                             <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payscontinent" name="payscontinent" type="text" placeholder="Continent" value=' .$nomcontinent .' required>
 
                             <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payslnagues">Langues</label>
-                            <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslnagues" type="text" placeholder="Langues" value= '. $info['langues'] .' required>
+                            <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslnagues" type="text" placeholder="Langues" value= '. $infop['langues'] .' required>
                                 
                             <div class="w-full flex justify-center md:justify-end gap-2">
                                 <input class="bg-green-500 text-white px-2 rounded-sm p-1" name="modifierpays" type="submit" value="Modifier">
@@ -108,19 +110,27 @@
             if (isset($_GET['ModV'])) {
 
                 $d_ville = $_GET['ModV'];
+                $infov = mysqli_query($conmySql , "SELECT * FROM ville WHERE id_ville = $d_ville");
+                $infov = mysqli_fetch_assoc($infov);
+                
+                $terme1 = $infov['id_pays'];
+                $pays = mysqli_query($conmySql, "SELECT nom FROM pays WHERE id_pays = $terme1");
+                $pays = mysqli_fetch_assoc($pays);
+                $nompays = $pays['nom'];
+
                 echo '<div class="bg-gray-300 w-[70%] h-[70%] rounded-[0.2rem]  gap-3 py-2 md:px-10">
                         <form action="modifier.php" method="Post" id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
                             <label class="w-full md:w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Villename">Nom du Ville</label>
-                            <input class=" w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Villename" name="villename" type="text" placeholder="Ville" required>
+                            <input class=" w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Villename" name="villename" type="text" placeholder="Ville" value= '. $infov['nom'] .' required>
 
                             <label class="w-[25%] text-center md:text-start md:text-[1.2rem] font-bold" for="#VilleType">Type</label>
-                            <input class=" w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VilleType" name="villetype" type="text" placeholder="Type" required>
+                            <input class=" w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VilleType" name="villetype" type="text" placeholder="Type" value= '. $infov['type'] .' required>
                             
                             <label class="w-[20%] text-center md:text-start md:text-[1.2rem] font-bold" for="#VillePays">Pays</label>
-                            <input class=" w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VillePays" name="villepays" type="text" placeholder="Pays" required>
+                            <input class=" w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VillePays" name="villepays" type="text" placeholder="pays" value= '. $nompays .' required>
                             
                             <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Villedesc">Descreption</label>
-                            <input class=" w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="VilleDescreption" name="villedescreption" type="text" placeholder="Descreption" required>
+                            <input class=" w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="VilleDescreption" name="villedescreption" type="text" placeholder="Descreption" value= "'. $infov['description'] .'" required>
                             
                             <div class="w-full flex justify-center md:justify-end gap-2">
                                 <input class="bg-green-500 text-white px-2 rounded-sm p-1" name="modifierville" type="submit" value="Modifier">
