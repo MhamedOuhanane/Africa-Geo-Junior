@@ -22,7 +22,7 @@ VALUES
 ('Kenya', '55000000', 'Kiswahili', 1),
 ('Éthiopie', '120000000', 'Oromo, Tigrigna', 1),
 ('Ghana', '35000000', 'Twi', 1),
-('République Démocratique du Congo', '90000000', 'Lingala, Kikongo', 1),
+('RD Congo', '90000000', 'Lingala, Kikongo', 1),
 ('Togo', '8500000', 'Ewe', 1),
 ('Sénégal', '17000000', 'Wolof', 1);
 

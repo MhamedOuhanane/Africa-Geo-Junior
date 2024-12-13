@@ -29,12 +29,36 @@
     <section id="géographie" class="w-full h-[100vh]">
         <div class="relative w-full h-full pt-[4rem] md:flex">
             <div id="ModulLogin" class="fixed z-10 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-                <form action="login.php" method="Post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+                    
+                    <?php 
+                        $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
+                        if (isset($_POST['submit'])) {
+                            $email = $_POST['emaillogin'];
+                            $password = $_POST['passwordlogin'];
+                            $res = mysqli_query($conmySql,"select * from login");
+                            $res = $res->fetch_all(MYSQLI_ASSOC);
+                            foreach($res as $el){
+                                if ($el['email'] == $email && $el['password'] == $password) {
+                                    echo '<script>location.replace("service.php")</script>';
+                                    // header("location: service.php");
+                                } else if ($el['email'] != $email ||  $el['password'] != $password) {
+                                    echo '<div id="ModulErreur" class="fixed z-30 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                                            <div class="bg-white w-[40%] h-[40vh] rounded-md flex flex-col justify-center items-center gap-y-3">
+                                                <span class="text-red-500 text-center">Adresse email ou mot de passe incorrect. Veuillez vérifier vos informations et réessayer.</span>
+                                                <button id="OK" class="bg-blue-700 text-white p-1 px-2 rounded-sm">OK</button>
+                                            </div>
+                                        </div>';
+                                };
+                            }
+                        }
+                    ?>
+
+                <form action="géographie.php" method="Post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
                     <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                     <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com">
                     <label class="md:w-[40%]" for="#passwordlogin">Password</label>
                     <input id="passwordlogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="passwordlogin" type="password" placeholder="********">
-                    <input id="conferme" class="bg-blue-600 px-2 py-1 rounded-[3px] mt-4" type="submit" value="Conferme">
+                    <input id="conferme" class="bg-blue-600 px-2 py-1 rounded-[3px] mt-4" name="submit" type="submit" value="Conferme">
                 </form>
             </div>
             <div class="bg-slate-200 w-full h-[8rem] md:w-[25%] md:h-full flex flex-col items-center ">
@@ -79,7 +103,7 @@
 
                     <div class=" bg-orange-50 bg-opacity-80 rounded-sm w-[10rem] h-[11rem] md:w-[12rem] md:h-[13.5rem] flex flex-col items-center place-content-center hover:scale-[1.02]">
                         <img class="w-[60%]" <?php echo "src =" . FILTRENAME($JsonPays,$element['nom']) ?> alt="Logo de Maroc">
-                        <span class="md:text-[2vw]"><?php echo $element['nom'] ?></span>
+                        <span class="md:text-[2vw] text-center"><?php echo $element['nom'] ?></span>
                         <div>
                             <span class="text-xs md:text-sm">Population :</span>
                             <span class="text-xs md:text-sm"><?php echo $element['population'] ?></span>
@@ -130,6 +154,7 @@
 
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script type="module" src="../assets/js/script.js"></script>
+    <script type="module" src="../assets/js/erreur.js"></script>
 
 </body>
 </html>

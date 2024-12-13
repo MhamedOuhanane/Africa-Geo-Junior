@@ -21,7 +21,7 @@
         </a>
         <div class="w-[50%] md:w-[25vw] flex justify-end gap-2 items-center">
             <a href="../index.php">
-                <button class="Login w-auto h-auto bg-blue-600 text-white rounded-md px-4 py-1 ">Logout</button>
+                <button class="w-auto h-auto bg-blue-600 text-white rounded-md px-4 py-1 ">Logout</button>
             </a>
             <a href="géographie.php">
                 <button class="w-auto h-auto bg-green-500 text-white rounded-md px-4 py-1 ">Géographie</button>
@@ -51,8 +51,8 @@
 
                 <!-- Continent -->
                 <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2">
-                    <form id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly ">
-                        <label class="md:text-[1.2rem]" for="#continentname">Nom du continent</label>
+                    <form action="service.php" id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly ">
+                        <label class="md:text-[1.2rem] font-bold" for="#continentname">Nom du continent</label>
                         <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname" type="text" placeholder="Continent" required>
                         <div class="w-full flex justify-center md:justify-end gap-2">
                             <input id="Affichercontinentbtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
@@ -83,22 +83,23 @@
 
                 <!-- Pays -->
                 <div id="ADDPays" class="w-full h-full  gap-3 p-2 md:px-10 hidden">
-                    <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
-                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Paysname">Nom du Pays</label>
+
+                    <form action="insert.php" method="Post" id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Paysname">Nom du Pays</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Paysname" name="paysname" type="text" placeholder="Pays" required>
 
-                        <label class="w-[25%] text-center md:text-start md:text-[1.2rem]" for="#Payspopulation">Population</label>
+                        <label class="w-[25%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payspopulation">Population</label>
                         <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payspopulation" name="payspopulation" type="number" placeholder="Population" required>
                         
-                        <label class="w-[20%] text-center md:text-start md:text-[1.2rem]" for="#Payscontinent">Continent</label>
+                        <label class="w-[20%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payscontinent">Continent</label>
                         <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="Payscontinent" name="payscontinent" type="text" placeholder="Continent" required>
                         
-                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Payslnagues">Langues</label>
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Payslnagues">Langues</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Payslnagues" name="payslnagues" type="text" placeholder="Langues" required>
                         
                         <div class="w-full flex justify-center md:justify-end gap-2">
                             <input id="Afficherpaysbtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
-                            <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
+                            <input class="bg-blue-200 px-2 rounded-sm p-1" name="submitpays" type="submit" value="Ajouter">
                         </div>
                     </form>
                 </div>
@@ -141,22 +142,22 @@
 
                 <!-- Villes -->
                 <div id="ADDVille" class="w-full h-full  gap-3 p-2 md:px-10 hidden">
-                    <form id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
-                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Villename">Nom du Ville</label>
+                    <form action="service.php" method="Post" id="Pays-form" class=" w-full h-full flex flex-wrap md:justify-between place-content-evenly">
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Villename">Nom du Ville</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="Villename" name="villename" type="text" placeholder="Ville" required>
 
-                        <label class="w-[25%] text-center md:text-start md:text-[1.2rem]" for="#VilleType">Type</label>
+                        <label class="w-[25%] text-center md:text-start md:text-[1.2rem] font-bold" for="#VilleType">Type</label>
                         <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VilleType" name="villetype" type="text" placeholder="Type" required>
                         
-                        <label class="w-[20%] text-center md:text-start md:text-[1.2rem]" for="#VillePays">Pays</label>
+                        <label class="w-[20%] text-center md:text-start md:text-[1.2rem] font-bold" for="#VillePays">Pays</label>
                         <input class="w-[90%] md:w-[20%] h-[6.5vh] rounded-none px-2" id="VillePays" name="villepays" type="text" placeholder="Pays" required>
                         
-                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem]" for="#Villedesc">Descreption</label>
+                        <label class="w-[28%] text-center md:text-start md:text-[1.2rem] font-bold" for="#Villedesc">Descreption</label>
                         <input class="w-[90%] md:w-[70%] h-[6.5vh] rounded-none px-2" id="VilleDescreption" name="villedescreption" type="text" placeholder="Descreption" required>
                         
                         <div class="w-full flex justify-center md:justify-end gap-2">
                             <input id="Affichervillebtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
-                            <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
+                            <input class="bg-blue-200 px-2 rounded-sm p-1" name="submitville" type="submit" value="Ajouter">
                         </div>
                     </form>
                 </div>

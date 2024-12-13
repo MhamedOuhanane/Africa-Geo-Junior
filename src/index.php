@@ -25,15 +25,38 @@
         </div>
     </header>
     <section id="About" class="relative w-full h-[100vh]">
+
+        <?php 
+            $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
+            if (isset($_POST['submit'])) {
+                $email = $_POST['emaillogin'];
+                $password = $_POST['passwordlogin'];
+                $res = mysqli_query($conmySql,"select * from login");
+                $res = $res->fetch_all(MYSQLI_ASSOC);
+                foreach($res as $el){
+                    if ($el['email'] == $email && $el['password'] == $password) {
+                        echo '<script>location.replace("./pages/service.php")</script>';
+                        // header("location: ./pages/service.php");
+                    } else if ($el['email'] != $email ||  $el['password'] != $password) {
+                        echo '<div id="ModulErreur" class="fixed z-30 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                                <div class="bg-white w-[60%] h-[50vh] md:w-[40%] md:h-[40vh] rounded-md flex flex-col justify-center items-center gap-y-3">
+                                    <span class="w-[90%] text-red-500 text-center">Adresse email ou mot de passe incorrect. Veuillez vérifier vos informations et réessayer.</span>
+                                    <button id="OK" class="bg-blue-700 text-white p-1 px-2 rounded-sm">OK</button>
+                                </div>
+                            </div>';
+                    };
+                }
+            }
+        ?>
+
         <div id="ModulLogin" class="fixed w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-            <form action="./pages/login.php" method="post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
+            <form action="index.php" method="post" class="bg-white w-[60%] h-[50vh] rounded-md flex flex-wrap justify-center md:justify-end px-[2vw] md:px-[5vw] place-content-center gap-y-[2vh]">
                 
-                <!-- <span class="text-center">Bonjour ! Entrez votre email et votre mot de passe pour vous connecter.</span> -->
                 <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                 <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com">
                 <label class="md:w-[40%]" for="#passwordlogin">Mot de passe</label>
                 <input id="passwordlogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="passwordlogin" type="password" placeholder="********">
-                <input id="conferme" class="bg-blue-600 px-2 py-1 rounded-[3px] mt-4" type="submit" value="Conferme">
+                <input id="conferme" class="bg-blue-600 px-2 py-1 rounded-[3px] mt-4" name="submit" type="submit" value="Conferme">
             </form>
         </div>
         <div class="absolute bg-black w-full h-full -z-10 flex overflow-x-auto">
@@ -64,6 +87,7 @@
     </section>
 
     <script type="module" src="./assets/js/script.js"></script>
+    <script type="module" src="./assets/js/erreur.js"></script>
 </body>
 </html>
 

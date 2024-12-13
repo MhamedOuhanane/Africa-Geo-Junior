@@ -1,3 +1,14 @@
+let inputs = document.querySelectorAll('input');
+function VIDEINPUT(){
+    inputs.forEach(Element => {
+        if (Element.type != 'submit' && Element.type != 'button') {
+            Element.value = "";
+            console.log(Element);
+            
+        };
+    });
+};
+
 // affiche la divesion pour ajouter un continent
 continentBTN.onclick = () => {
     ADDContinent.classList.remove("hidden");
@@ -6,6 +17,7 @@ continentBTN.onclick = () => {
     AffPays.classList.add("hidden");
     ADDVille.classList.add("hidden");
     AffVilles.classList.add("hidden");
+    VIDEINPUT();
 };
 
 // affiche la divesion pour ajouter un pays
@@ -16,6 +28,7 @@ paysBTN.onclick = () => {
     AffPays.classList.add("hidden");
     ADDVille.classList.add("hidden");
     AffVilles.classList.add("hidden");
+    VIDEINPUT();
 };
 
 // affiche la divesion pour ajouter une ville
@@ -26,6 +39,7 @@ villeBTN.onclick = () => {
     AffPays.classList.add("hidden");
     ADDVille.classList.remove("hidden");
     AffVilles.classList.add("hidden");
+    VIDEINPUT();
 };
 
 // afficher les continents pour la page de service
@@ -36,6 +50,7 @@ Affichercontinentbtn.onclick = () => {
     AffPays.classList.add("hidden");
     ADDVille.classList.add("hidden");
     AffVilles.classList.add("hidden");
+    VIDEINPUT();
 };
 
 // afficher les pays pour la page de service
@@ -46,6 +61,7 @@ Afficherpaysbtn.onclick = () => {
     AffPays.classList.remove("hidden");
     ADDVille.classList.add("hidden");
     AffVilles.classList.add("hidden");
+    VIDEINPUT();
 };
 
 // afficher les villes pour la page de service
@@ -56,4 +72,5 @@ Affichervillebtn.onclick = () => {
     AffPays.classList.add("hidden");
     ADDVille.classList.add("hidden");
     AffVilles.classList.remove("hidden");
+    VIDEINPUT();
 };
