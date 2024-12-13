@@ -31,10 +31,20 @@
         if (mysqli_query($conmySql,$insertpays)) {
             header("location: service.php");
         }
+    }
 
-    } else{
-        echo "hello";
-    };
+    if (isset($_GET['Supp'])) {
+        $Supp = $_GET['Supp'];
+
+        if ($Supp > 0) {
+            $supprimer = "DELETE FROM pays WHERE id_pays = $Supp";
+            mysqli_query($conmySql, $supprimer);
+        } else if ($Supp < 0) {
+            $Supp *= (-1);
+            $supprimer = "DELETE FROM ville WHERE id_ville = $Supp";
+            mysqli_query($conmySql, $supprimer);
+        }
+    }
 
 ?>
 
@@ -174,8 +184,10 @@
                                 <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
                             </button>
                             <button  class="DeletePays w-[25%]">
-                                <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
-                            </button>
+                                <a <?php echo "href=service.php?Supp=" . $Ele['id_pays'] ?>>
+                                    <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                                </a>
+                                </button>
                         </div>
                         <?php } ?>
                     </div>
@@ -232,7 +244,9 @@
                                 <img class="w-full" src="../assets/images/Modi.png" alt="bouton de modification">
                             </button>
                             <button  class="DeleteVille w-[30%]">
-                                <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                                <a <?php echo "href=service.php?Supp=" . $Ville['id_ville'] * (-1) ?>>
+                                    <img class="w-full" src="../assets/images/x-button.png" alt="bouton de suppression">
+                                </a>
                             </button>
                         </div>
                         <?php } ?>
