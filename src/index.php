@@ -41,7 +41,7 @@
                     } else if ($el['email'] == $email ||  $el['password'] != $password) {
                         echo '<div id="ModulErreur" class="fixed z-30 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
                                 <div class="bg-white w-[60%] h-[50vh] md:w-[40%] md:h-[40vh] rounded-md flex flex-col justify-center items-center gap-y-3">
-                                    <span class="w-[90%] text-red-500 text-center">Mot de passe incorrect. Veuillez vérifier vos informations et réessayer.</span>
+                                    <span class="w-[90%] text-red-500 text-center">Adress email ou Mot de passe incorrect. Veuillez vérifier vos informations et réessayer.</span>
                                     <button id="OK" class="bg-blue-700 text-white p-1 px-2 rounded-sm">OK</button>
                                 </div>
                             </div>';
@@ -56,7 +56,7 @@
                 <label class="md:w-[40%]"  for="#emaillogin">Email</label>
                 <input id="emaillogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="emaillogin" type="email" placeholder="exemple@gmail.com" required>
                 <label class="md:w-[40%]" for="#passwordlogin">Mot de passe</label>
-                <input id="passwordlogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="passwordlogin" type="password" placeholder="********" required>
+                <input id="passwordlogin" class="w-[95%] md:w-[60%] h-[2.5rem] border-solid border-2 px-2 rounded-sm" name="passwordlogin" type="password" min="8" placeholder="********" required>
                 <input id="conferme" class="bg-blue-600 px-2 py-1 rounded-[3px] mt-4" name="submit" type="submit" value="Conferme">
             </form>
         </div>

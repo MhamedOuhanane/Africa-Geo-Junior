@@ -1,5 +1,6 @@
 <?php
     $conmySql = mysqli_connect("localhost", "root", "", "geojunior");
+    $ERRUR = "";
     if (!empty($_POST['modifierpays'])) {
         $nounom = $_POST['paysname'];
         $noupopulation = $_POST['payspopulation'];
@@ -9,6 +10,7 @@
         $noucontient = mysqli_query($conmySql, "SELECT id_continent FROM continent WHERE nom = '$cont'");
         $noucontient = mysqli_fetch_assoc($noucontient);
         $nouidcontient = $noucontient['id_continent'];
+
         $modifier = "UPDATE pays SET nom = '$nounom', population = $noupopulation, langues = '$noulangues', id_continent = $nouidcontient WHERE id_pays =". $paysid;
         if (mysqli_query($conmySql, $modifier)) {
             header("location: service.php");
@@ -22,9 +24,13 @@
         $nouvcontient = mysqli_query($conmySql, "SELECT id_pays FROM pays WHERE nom = '$pay'");
         $nouvcontient = mysqli_fetch_assoc($nouvcontient);
         $nouvidcontient = $nouvcontient['id_pays'];
+
         $modifierv = "UPDATE ville SET nom = '$nounomv', type = '$noutype', description = '$noudescription', id_pays = $nouvidcontient WHERE id_ville =". $villeid;
         if (mysqli_query($conmySql, $modifierv)) {
             header("location: service.php");
+        } else {
+            $ERRUR = mysqli_error($conmySql);
+            echo $ERRUR;
         }
     };
 

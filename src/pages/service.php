@@ -4,7 +4,6 @@
 
         $villename = $_POST['villename'];
         
-
         $villetype = $_POST['villetype'];
         $villedescreption = $_POST['villedescreption'];
         $villepays = $_POST['villepays'];
@@ -13,9 +12,20 @@
         $forignpays = mysqli_fetch_assoc($forignpays);
         $id_pays = $forignpays['id_pays'];
 
-        $insertville = "INSERT INTO ville(nom, description, type, id_pays) VALUES ('$villename', '$villedescreption', '$villetype', $id_pays)";
-        if (mysqli_query($conmySql,$insertville)) {
-            header("location: service.php");
+        $verification = mysqli_query($conmySql, "SELECT * FROM pays WHERE nom = '$villename'");
+        $verification = $verification -> fetch_all(MYSQLI_ASSOC);
+
+        if (count($verification)) {
+            $insertville = "INSERT INTO ville(nom, description, type, id_pays) VALUES ('$villename', '$villedescreption', '$villetype', $id_pays)";
+            if (mysqli_query($conmySql,$insertville)) {
+                header("location: service.php");
+            } else{
+                $ERRUE = mysqli_error($conmySql);
+                echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
+            };
+        } else {
+            $ERRUE = "La ville " . $villename . " déjà existe dans la listes des villes.";
+            echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
         };
 
     } else if (!empty($_POST['submitpays'])) {
@@ -29,10 +39,21 @@
         $forigncontinent = mysqli_fetch_assoc($forigncontinent);
         $id_continent = $forigncontinent['id_continent'];
 
-        $insertpays = "INSERT INTO pays(nom, population, langues, id_continent) VALUES ('$paysname', $payspopulation, '$payslnagues', $id_continent)";
-        if (mysqli_query($conmySql,$insertpays)) {
-            header("location: service.php");
-        }
+        $verification = mysqli_query($conmySql, "SELECT * FROM pays WHERE nom = '$paysname'");
+        $verification = mysqli_fetch_array($verification);
+
+        if ($verification[0] == 0 ) {
+            $insertpays = "INSERT INTO pays(nom, population, langues, id_continent) VALUES ('$paysname', $payspopulation, '$payslnagues', $id_continent)";
+            if (mysqli_query($conmySql,$insertpays)) {
+                header("location: service.php");
+            }   else{
+                $ERRUE = mysqli_error($conmySql);
+                echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
+            };
+        } else {
+            $ERRUE = "Le pays " . $nom_pays . " existe déjà dans la listes des pays.";
+            echo '<script>location.replace("service.php?Erreur='. $ERRUE . '")</script>';
+        };
     }
 
     if (isset($_GET['Supp'])) {
@@ -81,7 +102,21 @@
             </a>
         </div>
     </header>
-    <section id="service" class="w-full h-[100vh]">
+    <section id="service" class="relative w-full h-[100vh]">
+
+        <?php 
+            if (isset($_GET['Erreur'])) {
+                echo '<div id="ModulErreur" class="fixed z-30 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                            <div class="bg-white w-[60%] h-[50vh] md:w-[40%] md:h-[40vh] rounded-md flex flex-col justify-center items-center gap-y-3">
+                                <span class="w-[90%] text-red-500 text-center">' .$_GET['Erreur'] .'</span>
+                                <a href="service.php">
+                                    <button id="OK" class="bg-blue-700 text-white p-1 px-2 rounded-sm">OK</button>
+                                </a>
+                            </div>
+                        </div>';
+            };
+        ?>
+
         <div class="w-full h-full pt-[4rem] md:flex">
             <div class="bg-slate-200 w-full h-[8rem] md:w-[20rem] md:h-full flex flex-col items-center ">
                 <button id="continentBTN" class="bg-none w-[60%] md:w-[90%] h-[2.6rem] border-solid border-b-[1px] border-black flex items-center gap-[1vw] pl-[8vw] md:pl-[1vw]">
@@ -106,7 +141,15 @@
                 <div id="ADDContinent" class=" w-full h-full md:px-[10vw] gap-3 p-2">
                     <form action="service.php" id="continent-form" class=" w-full h-[30%] flex flex-wrap md:justify-between place-content-evenly ">
                         <label class="md:text-[1.2rem] font-bold" for="#continentname">Nom du continent</label>
-                        <input class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname" type="text" placeholder="Continent" required>
+                        <select class="w-[90%] md:w-[60%] h-[6.5vh] rounded-none px-2" id="continentname" name="continentname">
+                            <option value="Africa">Africa</option>
+                            <option value="Asia">Africa</option>
+                            <option value="Europe">Africa</option>
+                            <option value="North Amirica">Africa</option>
+                            <option value="Oceane">Africa</option>
+                            <option value="South Amirica">Africa</option>
+                            <option value="Africa">Africa</option>
+                        </select>
                         <div class="w-full flex justify-center md:justify-end gap-2">
                             <input id="Affichercontinentbtn" class="bg-yellow-200 px-2 rounded-sm p-1" type="button" value="Afficher">
                             <input class="bg-blue-200 px-2 rounded-sm p-1" type="submit" value="Ajouter">
@@ -177,7 +220,7 @@
 
                         <div class="bg-white w-full h-auto border-gray-500 border-[1px] grid grid-cols-[6%_20%_14%_20%_10%_10%_10%_10%] items-center justify-items-center">
                             <span><?php echo $Ele['id_pays'] ?></span>
-                            <span class="text-center"><?php echo $Ele['nom'] ?></span>
+                            <span  class="text-[1vw] md:text-[1.6vw] text-center"><?php echo $Ele['nom'] ?></span>
                             <span class="text-xs md:text-sm"><?php echo $Ele['population'] ?></span>
                             <span class="text-xs md:text-sm text-center"><?php echo $Ele['langues'] ?></span>
                             <img class="w-[65%] md:w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$Ele['nom']) ?> alt="Logo de Pays">
@@ -240,7 +283,7 @@
                         ?> 
                         <div class="bg-gray-100 w-full h-auto border-gray-500 border-[1px] grid grid-cols-[10%_15%_30%_15%_10%_10%_10%] items-center py-1 justify-items-center">
                             <span><?php echo $Ville['id_ville'] ?></span>
-                            <span><?php echo $Ville['nom'] ?></span>
+                            <span class="text-[1vw] md:text-[1.6vw]"><?php echo $Ville['nom'] ?></span>
                             <span class="text-xs md:text-sm text-center h-auto w-[96%]"><?php echo $Ville['description'] ?></span>
                             <span class="text-xs md:text-[0.9rem]"><?php echo $Ville['type'] ?></span>
                             <img class="w-[50%]" <?php echo "src =" . FILTRENAME($JsonPays,$nompays['nom']) ?> alt="Logo de Maroc">
